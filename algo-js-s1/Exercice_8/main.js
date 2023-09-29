@@ -1,4 +1,4 @@
-class Pokemon {
+class pokemon {
     constructor(name, attack, defense, hp, luck) {
         this.name = name
         this.attack = attack
@@ -9,24 +9,27 @@ class Pokemon {
 
     attackPokemon(character) {
         let damageSuffered = this.attack - character.defense
-        return character.hp -= damageSuffered
+        if (damageSuffered < 0) {
+            return
+        } else {
+            character.hp -= damageSuffered
+        }
     }
 
     isLucky() {
         return this.luck > Math.random();
     }
 
-    
 }
 
-var tortank = new Pokemon("TORTANK", 75, 30, 250, 0.4)
-var leviator = new Pokemon("LEVIATOR", 100, 15, 200, 0.5)
+var tortank = new pokemon("TORTANK", 75, 30, 250, 0.4)
+var leviator = new pokemon("LEVIATOR", 100, 15, 200, 0.5)
 
 
 console.log("Le combat commence entre " + "\x1b[34m" + tortank.name + "\x1b[0m" + " " + "\x1b[32m" + tortank.hp + " HP" + "\x1b[0m" + " et " + "\x1b[34m" + leviator.name + "\x1b[0m" + " " + "\x1b[32m" + leviator.hp + " HP" + "\x1b[0m")
 
 
-while(tortank.hp > 0 && leviator.hp > 0) {
+while(tortank.hp >= 0 || leviator.hp >= 0) {
 
     if(tortank.isLucky()) {
         tortank.attackPokemon(leviator)
